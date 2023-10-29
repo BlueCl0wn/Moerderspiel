@@ -1,6 +1,7 @@
 import numpy as np
 from Reader import Reader
 import random
+import numpy.random
 
 names = ["Darek", "Paul", "Doro", "Niklas"]  # , "Moritz", "Mathilde", "Phuc", "Sophie"]
 
@@ -8,6 +9,7 @@ readers = Reader("names.txt")
 
 names = readers.get_names()
 print(names)
+
 
 def find_random_name() -> str:
     """
@@ -18,32 +20,32 @@ def find_random_name() -> str:
     return _name
 
 
-def create_murder_dict(name_list) -> dict:
-    """
-    Create a loop
-    :param name_list:
-    :return:
-    """
+def randomize(name_list: np.ndarray) -> np.ndarray:
+    rng = np.random.default_rng()
+    rng.shuffle(name_list)
+    return name_list
 
+
+def create_murder_dict_v2(name_list):
+    """"""
     # create solution dictonary
     solution = {}
 
     # save first murderer for later usage
-    first = find_random_name()
+    first = name_list[0]
 
-    # declare ongoing variable murderer
+    # declare murderer variable and assign 'first'
     murderer = first
 
-    # loop doing the looping stuff
-    for i in range(len(name_list)):
-        victim = find_random_name()
-        solution[murderer] = victim
-        murderer = victim
+    # looping over name_list an assigned victims to murderers
+    for name in name_list:
+        solution[murderer] = name  # add dict entry
+        murderer = name  # redefine murderer
 
-    # closing circle bei setting last murderers victim as first murderer
+    # create last dict entry with 'first'
     solution[murderer] = first
 
     return solution
 
 
-print(create_murder_dict(names))
+print(create_murder_dict_v2(names))

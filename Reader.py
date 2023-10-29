@@ -1,5 +1,8 @@
+import numpy as np
+
+
 class Reader:
-    URI : str
+    URI: str
 
     def __init__(self, URI):
         self.URI = URI
@@ -9,6 +12,6 @@ class Reader:
             t = f.read()
         return t
 
-    def get_names(self, sep=',') -> list:
+    def get_names(self, sep=',') -> np.ndarray:
         l = self.reads().split(sep)
-        return l
+        return np.asarray(l)
