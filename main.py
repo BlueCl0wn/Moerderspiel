@@ -1,51 +1,46 @@
 import numpy as np
-from Reader import Reader
-import random
 import numpy.random
 
-names = ["Darek", "Paul", "Doro", "Niklas"]  # , "Moritz", "Mathilde", "Phuc", "Sophie"]
-
-readers = Reader("names.txt")
-
-names = readers.get_names()
-print(names)
+from Reader import Reader
+from ausdruck import print_pdf
 
 
-def find_random_name() -> str:
-    """
-    Returns a random element from a list and removes it from the original list.
-    :return str: random element
-    """
-    _name = names.pop(random.randint(0, len(names) - 1))
-    return _name
-
-
-def randomize(name_list: np.ndarray) -> np.ndarray:
+def randomize(name_list: np.ndarray) -> list:
     rng = np.random.default_rng()
     rng.shuffle(name_list)
-    return name_list
+    return name_list.tolist()
 
 
-def create_murder_dict_v2(name_list):
-    """"""
-    # create solution dictonary
-    solution = {}
 
-    # save first murderer for later usage
-    first = name_list[0]
+if __name__ == "__main__":
 
-    # declare murderer variable and assign 'first'
-    murderer = first
+    n = (6, 12)
 
-    # looping over name_list an assigned victims to murderers
-    for name in name_list:
-        solution[murderer] = name  # add dict entry
-        murderer = name  # redefine murderer
-
-    # create last dict entry with 'first'
-    solution[murderer] = first
-
-    return solution
+    # get names
+    reader = Reader("names.txt")
+    names = randomize(reader.get_names())
+    print(names)
 
 
-print(create_murder_dict_v2(names))
+
+    # do murder stuff
+    victims = names[1:] + [names[0]]
+    data = [names, victims]
+
+
+    # slice list into chunks
+    names = [names[i:i + n[0]] for i in range(0, len(names), n[0])]
+    victims = [victims[i:i + n[0]] for i in range(0, len(victims), n[0])]
+    print("names: ", names)
+    print("victims: ", victims)
+
+    print(data)
+
+    names = [[name + "\n\n\n" for name in namess] for namess in names]
+    victims = [["Opfer\n\n\n" + victim for victim in victimss] for victimss in victims]
+
+    #do the magic
+    print_pdf(names, "murdergame_murderers.pdf", n=n)
+    print_pdf(victims, "murdergame_victims.pdf", n=n)
+
+
