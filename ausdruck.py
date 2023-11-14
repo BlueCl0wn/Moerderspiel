@@ -5,6 +5,12 @@ from reportlab.lib.units import cm, inch
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 
 
+def print_text(_data: list[str], URI, n: tuple, border=cm):
+    c = SimpleDocTemplate(URI, pagesize=A4, rightMargin=border, leftMargin=border, topMargin=0.8 * border,
+                          bottomMargin=0.8 * border)
+    c.build(_data)
+
+
 def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
     """
     Saves a pdf with a table filled with the 2-dimensional list parsed. This table fills the whole page.
