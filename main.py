@@ -40,7 +40,7 @@ if __name__ == "__main__":
     victims = [["Opfer\n\n\n" + victim for victim in victimss] for victimss in victims]
 
     #do the magic
-    print()
+    print(names)
     print_pdf(names, "murdergame_murderers.pdf", n=n)
     print_pdf(victims, "murdergame_victims.pdf", n=n)
 

@@ -28,7 +28,11 @@ def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
                           bottomMargin=0.8 * border)
 
     # Create table
-    t = Table(_data, colWidths=n[0] * [dim[0]], rowHeights=len(_data[-1]) * [dim[1]])
+    print("test", _data[-1])
+    print([dim[1]])
+    print(len(_data[-1]) * [dim[1]])
+    print(len(_data) * [dim[1]])
+    t = Table(_data, colWidths=n[0] * [dim[0]], rowHeights=len(_data) * [dim[1]])
 
     # Set table and font styles
     t.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -42,11 +46,11 @@ def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
     c.build([t])
 
 
-def print_pdf(data, URI: str, n: tuple = (6, 12), border=cm) -> None:
+def print_pdf(data, uri: str, n: tuple = (6, 12), border=cm) -> None:
     """
 
     :param data:
-    :param URI:
+    :param uri:
     :param n: n[1] > 5
     :param border:
     :return:
@@ -56,7 +60,7 @@ def print_pdf(data, URI: str, n: tuple = (6, 12), border=cm) -> None:
     width_x = int((A4[0] - 2 * border) / n[0])
     height_y = int((A4[1] - 2 * border) / n[1])
 
-    print_page(data, URI, n=n, border=border, dim=(width_x, height_y))
+    print_page(data, uri, n=n, border=border, dim=(width_x, height_y))
 
 
 if __name__ == "__main__":
