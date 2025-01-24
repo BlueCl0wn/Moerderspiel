@@ -12,6 +12,9 @@ class Reader:
             t = f.read()
         return t
 
+    def __str__(self):
+        return self.reads()
+
     def get_names(self, sep=',') -> np.ndarray:
         l = self.reads().split(sep)
         return np.asarray(l)
