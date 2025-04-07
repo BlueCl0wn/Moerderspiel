@@ -10,7 +10,7 @@ class Reader:
     def reads(self) -> str:
         with open(self.URI) as f:
             t = f.read()
-        return t
+        return t.replace(" ", "")
 
     def __str__(self):
         return self.reads()

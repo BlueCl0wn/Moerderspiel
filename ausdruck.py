@@ -26,12 +26,16 @@ def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
     # create template
     c = SimpleDocTemplate(URI, pagesize=A4, rightMargin=border, leftMargin=border, topMargin=0.8 * border,
                           bottomMargin=0.8 * border)
+    print("------")
+
 
     # Create table
     print("test", _data[-1])
     print([dim[1]])
     print(len(_data[-1]) * [dim[1]])
     print(len(_data) * [dim[1]])
+    print(_data)
+    print("------")
     t = Table(_data, colWidths=n[0] * [dim[0]], rowHeights=len(_data) * [dim[1]])
 
     # Set table and font styles
