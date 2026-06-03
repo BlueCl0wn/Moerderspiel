@@ -61,7 +61,11 @@ if __name__ == "__main__":
     print("PDFs were generated and saved in folder 'lists'.")
 
     # Create list for moderators.
-    numpy.savetxt("lists/mod_list__" + formatted_time + ".csv", data.transpose(), delimiter=",",fmt="%s")
+    numpy.savetxt("lists/mod_list__" + formatted_time + ".csv",
+                  data.transpose(),
+                  delimiter=",",
+                  fmt="%s",
+                  encoding="utf-8")
     print("Moderator list was generated and saved in folder 'lists'.")
 
 

@@ -22,18 +22,13 @@ def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
     c = SimpleDocTemplate(URI, pagesize=A4, rightMargin=border, leftMargin=border, topMargin=0.8 * border,
                           bottomMargin=0.8 * border)
 
-    c.setFont('DejaVuSans', 32)
-
-    #pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
-
-    # Register the font (do this once at the start of your script)
-    #pdfmetrics.registerFont(TTFont('ArialUnicodeMS', 'C:/Windows/Fonts/ARIALUNI.TTF'))
 
     # Create table
     t = Table(_data, colWidths=n[0] * [dim[0]], rowHeights=len(_data) * [dim[1]])
 
     # Set table and font styles
-    t.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+    t.setStyle(TableStyle([('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
+                           ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
                            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
                            ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
