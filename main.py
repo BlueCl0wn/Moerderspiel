@@ -1,6 +1,7 @@
 import numpy as np
 import numpy.random
 
+
 from Reader import Reader
 from ausdruck import print_pdf
 
@@ -41,7 +42,10 @@ if __name__ == "__main__":
     # print(np.asarray(data).transpose())
 
     names = [[name + "\n\n\n--------" for name in namess] for namess in names]
+    #names = [[name.encode("utf-8") for name in namess] for namess in names]
     victims = [["Opfer\n\n\n" + victim for victim in victimss] for victimss in victims]
+    #victims = [[victim.encode("utf-8") for victim in victimss] for victimss in victims]
+
     # Cushion last list of names to fix mirrored printing issues
     def cushion(_list):
         return _list + (n[0] - len(_list)) * [" "]

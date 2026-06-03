@@ -2,6 +2,8 @@ from reportlab.lib import colors
 import reportlab.pdfgen.canvas as canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm, inch
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 
 def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
@@ -20,6 +22,12 @@ def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
     c = SimpleDocTemplate(URI, pagesize=A4, rightMargin=border, leftMargin=border, topMargin=0.8 * border,
                           bottomMargin=0.8 * border)
 
+    c.setFont('DejaVuSans', 32)
+
+    #pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
+
+    # Register the font (do this once at the start of your script)
+    #pdfmetrics.registerFont(TTFont('ArialUnicodeMS', 'C:/Windows/Fonts/ARIALUNI.TTF'))
 
     # Create table
     t = Table(_data, colWidths=n[0] * [dim[0]], rowHeights=len(_data) * [dim[1]])

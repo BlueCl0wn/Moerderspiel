@@ -5,13 +5,14 @@ import numpy as np
 
 class Reader:
     URI: str
+    names : list
 
     def __init__(self, URI):
         self.URI = URI
 
     def reads(self) -> str:
         #try:
-        with open(self.URI) as f:
+        with open(self.URI, encoding="utf-8") as f:
             t = f.read()
         #except FileNotFoundError:
         #    print(f"FileNotFoundError: There is no file with the name or directory {self.URI}."
@@ -34,5 +35,6 @@ class Reader:
         name_list = np.asarray(self.split(sep)) # Convert list to np.ndarray
         rng = np.random.default_rng() # Create shuffle order
         rng.shuffle(name_list) # Shuffle name_list
-        return name_list.tolist()
+        self.names = name_list.tolist()
+        return self.names
 
