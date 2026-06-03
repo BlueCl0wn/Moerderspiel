@@ -1,9 +1,6 @@
 from reportlab.lib import colors
-import reportlab.pdfgen.canvas as canvas
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.units import cm, inch
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.units import cm
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 
 def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
