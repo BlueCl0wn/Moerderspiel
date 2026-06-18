@@ -3,6 +3,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 
+
 def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
     """
     Saves a pdf with a table filled with the 2-dimensional list parsed. This table fills the whole page.
@@ -16,21 +17,31 @@ def print_page(_data: list[str], URI, n: tuple, border, dim: tuple):
     """
 
     # create template
-    c = SimpleDocTemplate(URI, pagesize=A4, rightMargin=border, leftMargin=border, topMargin=0.8 * border,
-                          bottomMargin=0.8 * border)
-
+    c = SimpleDocTemplate(
+        URI,
+        pagesize=A4,
+        rightMargin=border,
+        leftMargin=border,
+        topMargin=0.8 * border,
+        bottomMargin=0.8 * border,
+    )
 
     # Create table
     t = Table(_data, colWidths=n[0] * [dim[0]], rowHeights=len(_data) * [dim[1]])
 
     # Set table and font styles
-    t.setStyle(TableStyle([('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
-                           ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                           ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                           ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                           ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-                           ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-                           ]))
+    t.setStyle(
+        TableStyle(
+            [
+                ("FONTNAME", (0, 0), (-1, -1), "Helvetica"),
+                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.black),
+                ("BOX", (0, 0), (-1, -1), 0.25, colors.black),
+            ]
+        )
+    )
 
     # Build page
     c.build([t])
