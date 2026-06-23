@@ -23,7 +23,7 @@ app = typer.Typer()
 def run(
     name_file: Annotated[
         str,
-        typer.Option(help="Name file to use. Needs to be csv, line breaks are ignored"),
+        typer.Argument(help="Name file to use. Needs to be csv, line breaks are ignored"),
     ] = "names.txt",
     n: Annotated[
         tuple[int, int],
@@ -34,6 +34,12 @@ def run(
     ] = "lists",
     language: str = "de",
 ):
+
+    """
+    Creates a PDF with a list of names and a list of victims for the murderer game.
+
+    Input is a csv file with names (delimiter ','). Outputs are placed in the folder 'des_file'.
+    """
 
     n = (6, 12)
 
@@ -74,11 +80,12 @@ def run(
 
     # Create PDFs for printing
     print_pdf(
-        names, des_file + "/murdergame_murderers__" + formatted_time + ".pdf", n=n
+        names,
+        (des_file if des_file != "" else "." )+ "/murdergame_murderers__" + formatted_time + ".pdf", n=n
     )
     print_pdf(
         victims_flipped,
-        des_file + "/murdergame_victims__" + formatted_time + ".pdf",
+        (des_file if des_file != "" else "." ) + "/murdergame_victims__" + formatted_time + ".pdf",
         n=n,
     )
     print("PDFs were generated and saved in folder 'lists'.")
